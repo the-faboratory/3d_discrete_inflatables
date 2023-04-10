@@ -9,7 +9,10 @@ fe >>> This directory contains scripts for running the finite element analysis n
 
 Main script: 
 -Main_Design_Opt_IDEP.py
-(IMPORTANT: run on a python IDE such as sypder or pycharm for the example, otherwise there might be dependency issues. The script will delete other files in the directory! In our default implementation, this is the C:\\Temp folder. Change in the script to whatever you desire.)
+(IMPORTANT: run on a python IDE such as sypder or pycharm for the example, otherwise there might be dependency issues. The script will delete other files in the directory! In our default implementation, this is the C:\\Temp folder. Change in the script to whatever you desire. Upon completion, design outputs are printed to the console. Note that these are scaled outputs, and must be un-scaled by the factors at the end of the Main_Design_Opt_IDEP.py script to get quantities with units.)
+
+Abaqus scripting file: 
+-Run.py
 
 Helper functions: 
 -HelpreFunctions.py 
@@ -17,7 +20,7 @@ Helper functions:
 Data processing: 
 -patched_cylinder_readout.py
 
-Example centerline (spring-like curve): 
+Example centerline (peano curve): 
 -req_centerline_test_scaled.csv 
 
 
@@ -32,5 +35,5 @@ Helper functions:
 -plot_tube.m
 
 Example centerlines: 
--spring_like_curve.csv 
+-peano_curve.csv 
 -pancake.csv 

@@ -52,7 +52,7 @@ l_0 =  292;                         %USER: [mm] Undeformed length of balloon
 k_tol = 0.01;                       %USER: [1/mm] At this magnitude or above, the curvature is enough that we assume a patch is on that segment. 0.01 was good for all cases we tested. 
 distinct_patch_spacing = 20;        %USER: [mm] Step size between two points (that may be part of a collection of close by points that represent a patch) that is big enough to indicate that there is a dinstinct new patch. Higher = fewer patches because we group more runs of points together. Lower = more patches. If too low, and neighbhoring patches are determined to lie right next to each other on the arclength, then we will get an error in KSA below.
 r_bal_0 = 3.18;                     %USER: [mm] radius of undeformed balloon
-path_to_centerline = 'spring_like_curve.csv'; %USER: name of centerline file (.csv format) 
+path_to_centerline = 'req_centerline_test_scaled.csv'; %USER: name of centerline file (.csv format) 
 
 %% 2. Load centerline curve------------------------------------------------
 
@@ -69,20 +69,20 @@ centerline = csvread(path_to_centerline);
 
 
 %%%%%%
-% optional processing of input curve for smoothness: 
-gradt = gradient(t); 
-% process k and t to remove any sharp jumps
-for i = 1:length(t)
-    if abs(gradt(i)) > 0.002
-       t(i+1)=t(i); 
-    end
-    if abs(k(i)) > 100 && i ~=1
-        k(i) = k(i-1);
-    end
-    if abs(t(i)) > 100 && i ~=1
-        t(i) = t(i-1);
-    end
-end
+% % optional processing of input curve for smoothness: 
+% gradt = gradient(t); 
+% % process k and t to remove any sharp jumps
+% for i = 1:length(t)
+%     if abs(gradt(i)) > 0.002
+%        t(i+1)=t(i); 
+%     end
+%     if abs(k(i)) > 100 && i ~=1
+%         k(i) = k(i-1);
+%     end
+%     if abs(t(i)) > 100 && i ~=1
+%         t(i) = t(i-1);
+%     end
+% end
 
 % % note, some curves may have first and last few entries in k and t that
 % % experience weird boundary effects due to derivative operations.

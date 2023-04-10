@@ -35,15 +35,14 @@ JOB_NAME      = PROJECT_NAME+'_job'
 STEPNAME_PRESSURE ='Holding-Step'
 
 CYL_RADIUS      = 3.18 # 3. Radius of cylinder in mm
-# CYL_LENGTH      = 300.  # Length of cylinder in mm
 CYL_LENGTH      = 292.  # Length of cylinder in mm
-CYL_THICKNESS   = 0.183  # 0.33 Cylinder thickness in mm
+CYL_THICKNESS   = 0.183  #  Cylinder thickness in mm
 PATCH_THICKNESS = 0.49
 CYL_CIRCUM      = 2*pi*CYL_RADIUS
 MESHSIZE        = CYL_CIRCUM/8. #Size of the elements
 TOLERANCE       = MESHSIZE/4.
 
-NUMOUTNODES   = 64 #Number of central nodes to determine output shape ()
+NUMOUTNODES   = 72 #Number of central nodes to determine output shape ()
 
 '''
 ------------------------------------------------------------------------

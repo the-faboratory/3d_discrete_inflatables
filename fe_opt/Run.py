@@ -84,7 +84,7 @@ MESHSIZE        = CYL_CIRCUM/10. #Size of the elements
 TOLERANCE       = MESHSIZE/4.
 
 # NUMOUTNODES   = int(ceil(CYL_LENGTH/(2.*MESHSIZE))+1) #Number of central nodes to determine output shape ()
-NUMOUTNODES   = 64 #Number of central nodes to determine output shape ()
+NUMOUTNODES   = 72 #Number of central nodes to determine output shape ()
 
 #------------------------------------------------------------------------
 #Patch parameters
@@ -102,12 +102,15 @@ NUMOUTNODES   = 64 #Number of central nodes to determine output shape ()
 
 PATCHES = []
 
+
 #------------------------------------------------------------------------
 
-PATCHES.append([squarepatch(1.5, 137.2814, CYL_RADIUS, -8.4824/CYL_CIRCUM*(2*pi), 151.9878, 3.6258/180.*pi), 0])
-
-
-
+PATCHES.append([squarepatch(1.5, 17, CYL_RADIUS, 4.0/CYL_CIRCUM*(2*pi), 43.93, 0.0/180.*pi), 0])
+PATCHES.append([squarepatch(1.5, 17, CYL_RADIUS, 4.0/CYL_CIRCUM*(2*pi), 87.88, 0.0/180.*pi), 0])
+PATCHES.append([squarepatch(1.5, 17, CYL_RADIUS, 8.99/CYL_CIRCUM*(2*pi), 128.21, 0.0/180.*pi), 0])
+PATCHES.append([squarepatch(1.5, 17, CYL_RADIUS, 8.99/CYL_CIRCUM*(2*pi), 163.87, 0.0/180.*pi), 0])
+PATCHES.append([squarepatch(1.5, 18.46, CYL_RADIUS, 4.0/CYL_CIRCUM*(2*pi), 204.84, 0.0/180.*pi), 0])
+PATCHES.append([squarepatch(1.5, 18.44, CYL_RADIUS, 4.0/CYL_CIRCUM*(2*pi), 248.78, 0.0/180.*pi), 0])
 #Selection options
 MATERIAL_OPTION = 1   # 1 = Arruda Boyce, 2 = Gent
 STEP_OPTION = 3		  # 0=static, 1 = Riks, 2=dynimpl, 3 = dynexpl
@@ -116,9 +119,9 @@ PROLONGED_HOLDING = 1 # 1 = do a second step with reduced mass scaling to let it
 
 #Material parameters
 # AB_LAM           = 2.5    #Arruda boyce labda factor
-# AB_MU            = 0.317  #Arruda boyce Shear Modulus
+# AB_MU            = 0.317  #0.3Arruda boyce Shear Modulus
 AB_LAM           = 2.3   #Arruda boyce labda factor
-AB_MU            = 0.317  #Arruda boyce Shear Modulus
+AB_MU            = 0.317  #0.3Arruda boyce Shear Modulus
 AB_D             = 0.     #Arruda boyce D-factor
 
 AB_LAM_patch     = 2.3
@@ -129,10 +132,11 @@ GENT_JM			 = 55.
 
 
 # Neo - Hookean Material
-NH_C1_Patch = 0.65 
+#NH_C1_Balloon = 0.08916
+NH_C1_Patch = 0.65 # 0.6115
 NH_D1 = 0.
 
-STIFFNESS_FACTOR = 1.1    #How much stiffer the patch is compared to the balloon (multiplier on MU) 
+STIFFNESS_FACTOR = 1.1    #1.1   5  How much stiffer the patch is compared to the balloon (multiplier on MU) 
 
 RHO        = 1e-9		  #Density
 RHO_Patch  = 1e-8		  #Density

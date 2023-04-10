@@ -37,7 +37,6 @@ import math
 import time
 from scipy.optimize import differential_evolution
 import cma
-import nevergrad #nevergrad is a gradient free optimization platform from Facebook
 from HelperFunctions import csv2list
 from HelperFunctions import frenet
 
@@ -116,8 +115,12 @@ def getSimData(x):
     f.close()
 
     # this line changes the patch definition in the Run.py file. Edit all the patches accordingly
-    data[107]='PATCHES.append([squarepatch(%f, %f, CYL_RADIUS, %f/CYL_CIRCUM*(2*pi), %f, 0.0/180.*pi), 0])\n'%(x[0],x[1],x[2],x[3])
-
+    data[107]='PATCHES.append([squarepatch(%f, %f, CYL_RADIUS, 4.0/CYL_CIRCUM*(2*pi), %f, 0.0/180.*pi), 0])\n'%(x[0],x[1],x[2])
+    data[108]='PATCHES.append([squarepatch(%f, %f, CYL_RADIUS, 4.0/CYL_CIRCUM*(2*pi), %f, 0.0/180.*pi), 0])\n'%(x[3],x[4],x[5])
+    data[109]='PATCHES.append([squarepatch(%f, %f, CYL_RADIUS, 8.99/CYL_CIRCUM*(2*pi), %f, 0.0/180.*pi), 0])\n'%(x[6],x[7],x[8])
+    data[110]='PATCHES.append([squarepatch(%f, %f, CYL_RADIUS, 8.99/CYL_CIRCUM*(2*pi), %f, 0.0/180.*pi), 0])\n'%(x[9],x[10],x[11])
+    data[111]='PATCHES.append([squarepatch(%f, %f, CYL_RADIUS, 4.0/CYL_CIRCUM*(2*pi), %f, 0.0/180.*pi), 0])\n'%(x[12],x[13],x[14])
+    data[112]='PATCHES.append([squarepatch(%f, %f, CYL_RADIUS, 4.0/CYL_CIRCUM*(2*pi), %f, 0.0/180.*pi), 0])\n'%(x[15],x[16],x[17])
 
 
     with open('C:\\Temp\\Run.py','w') as file:
@@ -165,7 +168,7 @@ def objective_func(x):
     # scale up the design variabels to give into ABAQUS
     #x_mul = [0.05, 0.02, 0.25, 0.04, 0.1]
     #x = x_mul * x
-     x_mul = [1/2, 1/160, 1/160, 1/5]
+     x_mul = [1/2, 1/20, 1/50, 1/2, 1/20, 1/50, 1/2, 1/20, 1/100, 1/2, 1/20, 1/100, 1/2, 1/20, 1/200, 1/2, 1/20, 1/200]
      x_mul = np.asarray(x_mul)
      x_unscaled = x / x_mul
      x_unscaled = np.ndarray.tolist(x_unscaled)
@@ -191,13 +194,18 @@ def objective_func(x):
 
          # objective funciton - RMSE between the shape array obtained from analysis and required shape array - divide it by function value with initial x0
         # f = np.linalg.norm(Req_Shape - Analysis_Shape) / 1050
-        f = (np.linalg.norm(k1 - k2) + np.linalg.norm(t1 - t2)) / 1.843
+        f = (np.linalg.norm(k1 - k2) + np.linalg.norm(t1 - t2)) / 0.829
 
         print(f)
 
 
         # constraints are defined on the bounds of the design domain and isotropy constraints
-        if(x[0] < 0.5 or x[0] > 1.5) or (x[1] < 0.81 or x[1] > 1.06) or (x[2] < 0.875 or x[2] > 1.0) or (x[3] < 0.0 or x[3] > 1.0):
+        if(x[0] < 0.5 or x[0] > 1.5) or (x[1] < 0.5 or x[1] > 1.5) or (x[2] < 0.8 or x[2] > 1.0) \
+            or (x[3] < 0.5 or x[3] > 1.5) or (x[4] < 0.5 or x[4] > 1.5) or (x[5] < 1.6 or x[5] > 1.8) \
+                or (x[6] < 0.5 or x[6] > 1.5) or (x[7] < 0.5 or x[7] > 1.5) or (x[8] < 1.2 or x[8] > 1.3) \
+                    or (x[9] < 0.5 or x[9] > 1.5) or (x[10] < 0.5 or x[10] > 1.5) or (x[11] < 1.6 or x[11] > 1.7)\
+                        or (x[12] < 0.5 or x[12] > 1.5) or (x[13] < 0.5 or x[13] > 1.5) or (x[14] < 1.0 or x[14] > 1.05) \
+                            or (x[15] < 0.5 or x[15] > 1.5) or (x[16] < 0.5 or x[16] > 1.5) or (x[17] < 1.2 or x[17] > 1.25):
              f = 100
              print('Out of Bounds')
 
@@ -220,15 +228,15 @@ if __name__ == '__main__':
 
   # bounds = [(0.0,0.5), (0.0,0.5), (0.0,0.5), (0.0,0.5), (0.0,0.5)]
 
-  x0 = [1.5, 150.0, 150.0, 1.78]
+  x0 = [1.5, 17, 43.93, 1.5, 17, 87.88, 1.5, 17, 128.21, 1.5, 17, 163.87, 1.5, 18.46, 204.84, 1.5, 18.44, 248.78]
   x0 = np.asarray(x0)
-  x_mul = [1/2, 1/160, 1/160, 1/5]
+  x_mul = [1/2, 1/20, 1/50, 1/2, 1/20, 1/50, 1/2, 1/20, 1/100, 1/2, 1/20, 1/100, 1/2, 1/20, 1/200, 1/2, 1/20, 1/200]
   x_mul = np.asarray(x_mul)
   x0_scaled = x_mul * x0
-  x0_scaled = np.ndarray.tolist(x0_scaled) # []
+  x0_scaled = np.ndarray.tolist(x0_scaled) # [0.75  , 1.    , 0.89  , 0.75  , 1.    , 1.702 , 0.75  , 1.    ,   1.257 , 0.75  , 1.    , 1.663 , 0.75  , 1.    , 1.0345, 0.75  , 1.    , 1.2375]
 
   tic()
-  res = cma.fmin(objective_func, x0_scaled, 0.01, options={'verb_disp':1, 'maxiter': 150})
+  res = cma.fmin(objective_func, x0_scaled, 0.01, options={'verb_disp':1, 'maxiter': 5})
   toc()
 
   print(res[0])

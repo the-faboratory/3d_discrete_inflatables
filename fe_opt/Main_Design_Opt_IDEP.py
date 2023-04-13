@@ -4,7 +4,7 @@
 This is the main file for design optmization in abaqus
 Author : Sree Patiballa, Yale Universtiy
 Current Affiation: University of Alabama, spatiballa@ua.edu
-References : Add all the necessary references here
+References : Necessary references used for the design optimization
 -> Analysis code:  Ben G, from Prof. Bertoldi's group at Harvard
 -> CMA-ES documentation : http://cma.gforge.inria.fr/cmaes_sourcecode_page.html#practical
 
